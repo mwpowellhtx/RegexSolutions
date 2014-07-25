@@ -44,12 +44,12 @@ command_line_options::command_line_options(int argc, char* argv[])
     // iterate through each of the args ignoring the first one (program path)
     for (int i = 1; i < argc; i++) {
 
-        if (is_use_pcre(argv[i])) {
+        if (is_switch(argv[i], "pcre")) {
             _use_pcre = true;
             continue;
         }
 
-        if (is_filename_arg(argv[i])) {
+        if (is_switch(argv[i], "f")) {
             //TODO: might be an exception otherwise
             if (i == argc - 1) return;
             _filename = argv[++i];
@@ -79,12 +79,9 @@ bool command_line_options::use_pcre() {
     return _use_pcre;
 }
 
-bool command_line_options::is_filename_arg(const std::string& arg) {
-    return std::regex_match(arg, std::regex("[-/]f"));
-}
-
-bool command_line_options::is_use_pcre(const std::string& arg) {
-    return std::regex_match(arg, std::regex("[-/]pcre"));
+bool command_line_options::is_switch(const std::string& arg, const std::string& name_pattern) {
+    auto _x = "[-/]" + name_pattern;
+    return std::regex_match(arg, std::regex(_x));
 }
 
 void command_line_options::open() {

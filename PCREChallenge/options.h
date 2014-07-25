@@ -92,13 +92,9 @@ private:
 
     /// returns whether the arg is the filename one
     /// @param arg the command line arg
+    /// @param name_pattern a string name pattern
     /// @returns whether is filename arg
-    static bool is_filename_arg(const std::string& arg);
-
-    /// returns whether the to use PCRE
-    /// @param arg the command line arg
-    /// @returns whether the to use PCRE
-    static bool is_use_pcre(const std::string& arg);
+    static bool is_switch(const std::string& arg, const std::string& name_pattern);
 
     /// opens the filename if it were possible
     void open();
