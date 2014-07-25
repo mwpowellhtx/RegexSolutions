@@ -49,10 +49,13 @@ match_fixture& match_fixture::aggregate() {
     // bind this guy one time since that can be an expensive repetitive prospect
     auto process_ = std::bind(&match_fixture::process, this, _1, _2);
 
+    // ditto new line character trolling
     while (!is_.eof()) {
 
         std::string line;
 
+        /* no need to go trolling for new line characters:
+        http://www.cplusplus.com/reference/string/string/getline/ */
         std::getline(is_, line);
 
         std::for_each(patterns_.begin(), patterns_.end(), [&](const std::string& x) {
