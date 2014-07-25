@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>pcre.redist</id>
+    <version>8.33.0.1</version>
+    <title>PCRE - Perl Compatible Regular Expressions Redist</title>
+    <authors>pcre contributors</authors>
+    <owners>pcre contributors</owners>
+    <licenseUrl>http://pcre.org/licence.txt</licenseUrl>
+    <projectUrl>http://github.com/coapp-packages/pcre</projectUrl>
+    <iconUrl>http://icon_url_here_or_delete_this_line/</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Redistributable components for package 'pcre'. This package should only be installed as a dependency. 
+(This is not the package you are looking for).</description>
+    <summary>Redistributable components for for package 'pcre'</summary>
+    <releaseNotes>Release of pcre 8.33 libraries.</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>pcre perl regex native CoApp</tags>
+  </metadata>
+</package>
