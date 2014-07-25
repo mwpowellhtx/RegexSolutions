@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>pcre</id>
+    <version>8.33.0.1</version>
+    <title>PCRE - Perl Compatible Regular Expressions</title>
+    <authors>pcre contributors</authors>
+    <owners>pcre contributors</owners>
+    <licenseUrl>http://pcre.org/licence.txt</licenseUrl>
+    <projectUrl>http://github.com/coapp-packages/pcre</projectUrl>
+    <iconUrl>http://icon_url_here_or_delete_this_line/</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The PCRE library is a set of functions that implement regular expression pattern matching using the same syntax and semantics as Perl 5.  The PCRE library is free, even for building proprietary software.
+	PCRE homepage:  http://pcre.org/</description>
+    <summary>PCRE - Perl Compatible Regular Expressions</summary>
+    <releaseNotes>Release of pcre 8.33 libraries.</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>pcre perl regex native CoApp</tags>
+    <dependencies>
+      <dependency id="pcre.redist" version="8.33.0.1" />
+    </dependencies>
+  </metadata>
+</package>
