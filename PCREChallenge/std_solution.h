@@ -12,7 +12,7 @@ namespace trx {
     /// @see http://www.cplusplus.com/reference/regex/
     /// @see http://www.cplusplus.com/reference/regex/regex_match/
     /// @see http://www.cplusplus.com/reference/regex/ECMAScript/
-    bool is_match(const std::string& l, const std::string& x);
+    extern bool is_match(const std::string& l, const std::string& x);
 }
 
 #endif //INTERVIEW_STD_SOLUTION_H

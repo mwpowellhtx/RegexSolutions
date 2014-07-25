@@ -33,6 +33,9 @@
     <ClCompile Include="report_results.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="match_fixture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />
@@ -51,6 +54,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="report_results.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="match_fixture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="self.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

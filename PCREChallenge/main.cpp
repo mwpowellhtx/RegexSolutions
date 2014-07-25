@@ -4,12 +4,10 @@
 
 #include "await_results.h"
 #include "report_results.h"
+#include "match_fixture.h"
 
 #include <cassert>
 #include <functional>
-
-/// convenience match function type definition
-typedef std::function<bool(std::string, std::string)> processor_func;
 
 /// the main method
 /// @param argc the number of args
@@ -20,68 +18,75 @@ int main(int argc, char* argv[]) {
         return 1; //too few arguments
     }
 
-    // for use when we emplace the matches
-    typedef std::lock_guard<std::mutex> mutex_guard;
-
-    /// specifies what an is_match function should be about
-    typedef std::function<bool(const std::string&, const std::string&)> is_match_func;
-
-    // gather up the args and use them as match patterns
-    options opt(argc, argv);
-
-    // setup to do some match processing
-    processing_deque processing;
-    matched_multimap matches;
-    std::mutex matches_mutex;
-
     using std::placeholders::_1;
     using std::placeholders::_2;
 
-    //bind the match functionality one way or another
-    //auto is_match = std::bind(&pcre_ns::is_match, _1, _2);
-    auto is_match = std::bind(&trx::is_match, _1, _2);
+    /* Considering the fact the regular expression patterns are virtually,
+    if not precisely, identical, why not simply leverage std::regex, at
+    minimum, or consider boost::regex is more precise features are required.
+    See supporting commentary throughout the solution. */
 
-    /*  for clarity not only that we receive the args but also returning bool,
-    additionally capture the match details */
-    processor_func process_match = [&is_match, &matches, &matches_mutex](
-        std::string l, std::string x) -> bool {
+    auto trx_is_match_ = std::bind(&trx::is_match, _1, _2);
+    auto pcre_is_match_ = std::bind(&pcre_ns::is_match, _1, _2);
 
-        if (is_match(l, x)) {
-            // guard the matches when we emplace them
-            mutex_guard guard(matches_mutex);
-            // mind the match emplacement: pattern followed by matching line
-            matches.emplace(x, l);
-            return true;
-        }
+    /* demonstrated functionality in sub-blocks, followed by a closing "live"
+    command line operation of the same */
 
-        return false;
-    };
+    {
+        test_options::pattern_vector patterns_;
+        patterns_.push_back("\\D+\\d+.*");
 
-    // receives input from the input stream
-    auto aggregator = [&opt, &processing, &process_match](std::istream& is) {
+        test_options opt_(
+            "foo 154826 is a bar"
+            "\nfoo blah is bar"
+            "\nfoo blah"
+            "\nfoo 356824 is a very big boat"
+            "\nfoo blah is"
+            , patterns_);
 
-        auto policy_ = std::launch::deferred;
-        auto& patterns_ = opt._patterns;
+        match_fixture(opt_, pcre_is_match_
+            , [](matched_multimap::size_type c, const matched_multimap& m) {
 
-        while (!is.eof()) {
+            assert(c == 2);
+            assert(m.size() == c);
+            assert(m.count("\\D+\\d+.*") == 2);
+            assert(m.find("\\D+\\d+.*")->second == "foo 154826 is a bar");
+            matched_multimap_range range_ = m.equal_range("\\D+\\d+.*");
+            assert(count(range_) == 2);
+            /* follow this: the first first is the equal range:
+            the thing behind is is the actual pairing */
+            auto current_ = range_.first;
+            assert(current_->second == "foo 154826 is a bar");
+            current_++;
+            assert(current_->second == "foo 356824 is a very big boat");
+        });
+    }
 
-            std::string line;
+    {
+        //arrange for and run a demo involving std::regex features
+        test_options::pattern_vector patterns_;
+        patterns_.push_back("\\D+\\d+.*");
 
-            std::getline(is, line);
+        test_options opt_(
+            "this is a 1234 match"
+            "\nthis is a not a match"
+            , patterns_);
 
-            for (auto it = patterns_.begin(); it != patterns_.end(); it++) {
-                processing.push_back(std::async(policy_, process_match, line, *it));
-            }
-        }
-    };
+        match_fixture(opt_, trx_is_match_
+            , [](matched_multimap::size_type c, const matched_multimap& m) {
+        
+            assert(c == 1);
+            assert(m.size() == c);
+            assert(m.count("\\D+\\d+.*") == 1);
+            assert(m.find("\\D+\\d+.*")->second == "this is a 1234 match");
+        });
+    }
 
-    // aggregate from the options stream
-    aggregator(opt.stream());
-
-    // await the processing results
-    auto count_ = await_results(processing);
-
-    report_results(count_, matches);
+    {
+        // now go for the "live demo" after having run a couple of scenarios
+        command_line_options opt(argc, argv);
+        match_fixture(opt, opt.use_pcre() ? pcre_is_match_ : trx_is_match_);
+    }
 
     return 0;
 }

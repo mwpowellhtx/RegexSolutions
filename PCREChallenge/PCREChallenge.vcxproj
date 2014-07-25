@@ -18,13 +18,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -67,6 +67,7 @@
   <ItemGroup>
     <ClCompile Include="await_results.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="match_fixture.cpp" />
     <ClCompile Include="options.cpp" />
     <ClCompile Include="pcre_solution.cpp" />
     <ClCompile Include="report_results.cpp" />
@@ -79,9 +80,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="await_results.h" />
+    <ClInclude Include="match_fixture.h" />
     <ClInclude Include="options.h" />
     <ClInclude Include="pcre_solution.h" />
     <ClInclude Include="report_results.h" />
+    <ClInclude Include="self.hpp" />
     <ClInclude Include="std_solution.h" />
   </ItemGroup>
   <ItemGroup>

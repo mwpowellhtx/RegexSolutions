@@ -1,5 +1,15 @@
 #include "await_results.h"
 
+matched_multimap::size_type count(const matched_multimap_range& range) {
+
+    matched_multimap::size_type count_ = 0;
+
+    for (auto it = range.first; it != range.second; it++)
+        count_++;
+
+    return count_;
+}
+
 /// awaits each of the processing futures and tallies the overall result
 /// @param processing a deque of matching futures
 /// @returns the overall number of matches processed

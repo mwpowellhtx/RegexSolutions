@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <cassert>
 
 void report_results(matched_multimap::size_type count, const matched_multimap& matches) {
 
