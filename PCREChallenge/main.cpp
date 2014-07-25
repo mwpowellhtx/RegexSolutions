@@ -1,10 +1,9 @@
+// facilitates the matching process
+#include "match_fixture.h"
+
+// incorporate loosely coupled matching solutions
 #include "std_solution.h"
 #include "pcre_solution.h"
-#include "options.h"
-
-#include "await_results.h"
-#include "report_results.h"
-#include "match_fixture.h"
 
 #include <cassert>
 #include <functional>
