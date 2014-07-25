@@ -6,3 +6,4 @@ Brief description of the command line options.
 |--------|-----------|-------------|
 | [-/]f | input-file-name | indicates the input file from which to draw match candidates |
 | [-/]pcre | | signals whether to use PCRE for regex |
+| | regex-pattern | free standing regular expression patterns |
