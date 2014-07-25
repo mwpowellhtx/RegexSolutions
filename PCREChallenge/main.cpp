@@ -37,11 +37,11 @@ int main(int argc, char* argv[]) {
         patterns_.push_back("\\D+\\d+.*");
 
         test_options opt_(
-            "foo 154826 is a bar"
-            "\nfoo blah is bar"
-            "\nfoo blah"
-            "\nfoo 356824 is a very big boat"
-            "\nfoo blah is"
+            "foo 154826 is a bar\n"
+            "foo blah is bar\n"
+            "foo blah\n"
+            "foo 356824 is a very big boat\n"
+            "foo blah is\n"
             , patterns_);
 
         match_fixture(opt_, pcre_is_match_
@@ -68,8 +68,8 @@ int main(int argc, char* argv[]) {
         patterns_.push_back("\\D+\\d+.*");
 
         test_options opt_(
-            "this is a 1234 match"
-            "\nthis is a not a match"
+            "this is a 1234 match\n"
+            "this is a not a match\n"
             , patterns_);
 
         match_fixture(opt_, trx_is_match_
