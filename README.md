@@ -1,4 +1,4 @@
-=== Regular Expression Solutions ===
+### Regular Expression Solutions
 
 Brief description of the command line options.
 
