@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
             assert(m.size() == c);
             assert(m.count("\\D+\\d+.*") == 2);
             assert(m.find("\\D+\\d+.*")->second == "foo 154826 is a bar");
-            matched_multimap_range range_ = m.equal_range("\\D+\\d+.*");
+            matched_multimap_const_range range_ = m.equal_range("\\D+\\d+.*");
             assert(count(range_) == 2);
             /* follow this: the first first is the equal range:
             the thing behind is is the actual pairing */

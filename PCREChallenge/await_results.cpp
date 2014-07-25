@@ -1,6 +1,6 @@
 #include "await_results.h"
 
-matched_multimap::size_type count(const matched_multimap_range& range) {
+matched_multimap::size_type count(const matched_multimap_const_range& range) {
 
     matched_multimap::size_type count_ = 0;
 
